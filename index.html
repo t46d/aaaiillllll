@@ -3,84 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ignite ó Glass & Flame</title>
+  <title>Ignite ‚Äî Glass & Flame</title>
   <meta name="description" content="A fiery glassmorphism 3D landing experience with multilingual support." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg-1:#0b0b12; --bg-2:#140d1a;
-      --glow-1:#ff6a00; --glow-2:#ff1e56; --glow-3:#fa709a;
-      --glass-bg:rgba(255,255,255,.10); --glass-border:rgba(255,255,255,.25);
-      --text:#e8e8f0; --muted:#a8a8bc; --shadow:#000000cc;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%; background: radial-gradient(1200px 600px at 20% 0%, #1a1022 0%, var(--bg-2) 40%, var(--bg-1) 100%); color:var(--text); font-family: Inter, Tajawal, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; overflow-x:hidden;}
-    .backdrop{position:fixed; inset:0; z-index:-3; background: conic-gradient(from 180deg at 50% 50%, var(--glow-2), var(--glow-1), var(--glow-3), var(--glow-2)); filter: blur(80px) saturate(120%); opacity:.25; animation: swirl 22s linear infinite;}
-    @keyframes swirl{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.05)}100%{transform:rotate(360deg) scale(1)}}
-    .embers{position:fixed; inset:0; z-index:-2; pointer-events:none}
-    .ember{position:absolute; width:6px; height:6px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff8, #ffb700cc 40%, transparent 70%); filter: blur(1px); animation: float 12s linear infinite;}
-    @keyframes float{0%{transform:translateY(0) translateX(0); opacity:.0}10%{opacity:.7}50%{opacity:.9}100%{transform:translateY(-120vh) translateX(12vw); opacity:0}}
-    .layer{position:fixed; inset:0; z-index:-1; pointer-events:none; background: radial-gradient(800px 400px at 80% 100%, #ff1e5618 0%, transparent 60%), radial-gradient(600px 300px at 0% 0%, #ff6a0012 0%, transparent 70%); mix-blend-mode: screen; transform: translateZ(0);}
-    .cursor-light{position:fixed; width:240px; height:240px; border-radius:50%; pointer-events:none; z-index:-1; background: radial-gradient(circle, #ffffff22 0%, #ff6a0018 40%, transparent 70%); filter: blur(20px); transform: translate(-50%, -50%); transition: transform .05s linear;}
-    header{position:sticky; top:0; backdrop-filter:saturate(130%) blur(10px); background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,0)); border-bottom:1px solid rgba(255,255,255,.08);}
-    .nav{max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:16px;}
-    .logo{font-weight:800; letter-spacing:.5px; display:flex; align-items:center; gap:10px;}
-    .logo .mark{width:24px; height:24px; border-radius:6px; background: linear-gradient(135deg, var(--glow-1), var(--glow-2)); box-shadow: 0 10px 30px var(--glow-2);}
-    .nav-actions{margin-left:auto; display:flex; gap:12px; align-items:center}
-    .lang{appearance:none; border:1px solid var(--glass-border); background: var(--glass-bg); color:var(--text); padding:8px 12px; border-radius:10px; backdrop-filter: blur(8px);}
-    .btn{border:none; border-radius:12px; padding:10px 16px; cursor:pointer; color:#0b0b12; font-weight:700; background: linear-gradient(135deg, var(--glow-1), var(--glow-2)); box-shadow: 0 10px 30px #ff1e5633; transition: transform .15s ease, box-shadow .15s ease;}
-    .btn:hover{transform: translateY(-2px); box-shadow: 0 18px 40px #ff1e5644}
-    .btn.ghost{background: var(--glass-bg); color:var(--text); border:1px solid var(--glass-border); box-shadow: 0 6px 20px #00000033;}
-    .btn.ghost:hover{box-shadow: 0 10px 28px #00000055}
-    main{max-width:1200px; margin:0 auto; padding:48px 24px;}
-    .hero{min-height:60vh; display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:center;}
-    @media(max-width:920px){.hero{grid-template-columns:1fr; min-height:auto}}
-    .card{background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid var(--glass-border); border-radius:24px; padding:28px; backdrop-filter: blur(16px); box-shadow: 0 30px 80px var(--shadow); transform-style: preserve-3d; perspective: 800px;}
-    .title{font-size: clamp(28px, 4vw, 54px); font-weight:800; line-height:1.05; background: linear-gradient(135deg, #fff, #ffd1bf); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 4px 24px #ffffff12;}
-    .title-glow{animation: glowMorph 6s ease-in-out infinite;}
-    @keyframes glowMorph{0%{text-shadow: 0 0 24px #ff6a0033}50%{text-shadow: 0 0 34px #ff1e5644}100%{text-shadow: 0 0 24px #fa709a33}}
-    .subtitle{color:var(--muted); margin-top:12px}
-    .cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
-    .showcase{position:relative; height:360px; display:grid; place-items:center; perspective: 1000px;}
-    .cube{width:260px; height:260px; position:relative; transform-style: preserve-3d; animation: spin 12s ease-in-out infinite alternate;}
-    @keyframes spin{0%{transform: rotateX(12deg) rotateY(-20deg) translateZ(0)}50%{transform: rotateX(22deg) rotateY(200deg) translateZ(20px)}100%{transform: rotateX(8deg) rotateY(420deg) translateZ(-10px)}}
-    .face{position:absolute; width:100%; height:100%; border-radius:20px; border:1px solid var(--glass-border); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); box-shadow: 0 20px 60px #0008; backdrop-filter: blur(12px);}
-    .f-front{transform: translateZ(130px)} .f-back{transform: rotateY(180deg) translateZ(130px)}
-    .f-right{transform: rotateY(90deg) translateZ(130px)} .f-left{transform: rotateY(-90deg) translateZ(130px)}
-    .f-top{transform: rotateX(90deg) translateZ(130px)} .f-bottom{transform: rotateX(-90deg) translateZ(130px)}
-    .badge{position:absolute; bottom:20px; right:20px; background: linear-gradient(135deg, var(--glow-2), var(--glow-3)); color:#0b0b12; font-weight:800; padding:8px 12px; border-radius:12px; box-shadow: 0 10px 30px #ff1e5633;}
-    .grid{margin-top:40px; display:grid; grid-template-columns: repeat(3, 1fr); gap:20px;}
-    @media(max-width:920px){.grid{grid-template-columns:1fr}}
-    .tile{position:relative; overflow:hidden; border-radius:20px; border:1px solid var(--glass-border); background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)); box-shadow: 0 18px 50px #0008; transition: transform .2s ease, box-shadow .2s ease;}
-    .tile:hover{transform: translateY(-3px) rotateX(1deg) rotateY(-1deg); box-shadow: 0 26px 70px #000a}
-    .tile h3{margin:18px; font-size:18px}
-    .tile p{margin:0 18px 18px; color:var(--muted)}
-    .tile::after{content:""; position:absolute; inset:-40% -20%; transform:rotate(12deg); background: radial-gradient(120px 80px at 30% 30%, #fff3 0%, transparent 70%); filter: blur(16px);}
-    footer{margin-top:60px; padding:28px; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); text-align:center;}
-    .audio-indicator{font-size:12px; color:var(--muted);}
+    /* ŸÜŸÅÿ≥ ÿßŸÑÿ™ŸÜÿ≥ŸäŸÇÿßÿ™ ÿßŸÑÿ≥ÿßÿ®ŸÇÿ© ŸÖÿπ ÿ™ÿπÿØŸäŸÑÿßÿ™ ÿ∑ŸÅŸäŸÅÿ© */
+    :root{--bg-1:#0b0b12;--bg-2:#140d1a;--glow-1:#ff6a00;--glow-2:#ff1e56;--glow-3:#fa709a;--glass-bg:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.25);--text:#e8e8f0;--muted:#a8a8bc;--shadow:#000000cc;}
+    body{background: radial-gradient(1200px 600px at 20% 0%, #1a1022 0%, var(--bg-2) 40%, var(--bg-1) 100%);color:var(--text);font-family:Inter,Tajawal,sans-serif;}
+    .title{font-size:clamp(28px,4vw,54px);font-weight:800;background:linear-gradient(135deg,#fff,#ffd1bf);-webkit-background-clip:text;color:transparent;text-shadow:0 4px 24px #ffffff12;}
+    .title-glow{animation:glowMorph 6s ease-in-out infinite;}
+    @keyframes glowMorph{0%{text-shadow:0 0 24px #ff6a0033}50%{text-shadow:0 0 34px #ff1e5644}100%{text-shadow:0 0 24px #fa709a33}}
   </style>
 </head>
 <body>
-  <div class="backdrop"></div>
-  <div class="embers" id="embers"></div>
-  <div class="layer" id="layer"></div>
-  <div class="cursor-light" id="cursorLight"></div>
-
   <header>
     <nav class="nav">
       <div class="logo"><div class="mark"></div><span>Ignite</span></div>
       <div class="nav-actions">
-        <select id="lang" class="lang" aria-label="Language">
+        <select id="lang" class="lang">
           <option value="en" selected>English</option>
-          <option value="ar">«·⁄—»Ì…</option>
-          <option value="th">???</option>
-          <option value="hi">??????</option>
-          <option value="es">Espa?ol</option>
+          <option value="ar">ÿßŸÑÿπÿ±ÿ®Ÿäÿ©</option>
+          <option value="th">‡πÑ‡∏ó‡∏¢</option>
+          <option value="hi">‡§π‡§ø‡§®‡•ç‡§¶‡•Ä</option>
+          <option value="es">Espa√±ol</option>
         </select>
-        <button class="btn ghost" id="theme">Glow</button>
-        <button class="btn ghost" id="audio">Sound: Off</button>
         <a class="btn" href="#truth">See the truth</a>
       </div>
     </nav>
@@ -90,46 +38,24 @@
     <section class="hero">
       <div class="card" id="heroCard">
         <h1 class="title title-glow" id="title">Unmask the lie. Truth stands taller.</h1>
-        <p class="subtitle" id="subtitle">Bold clarity over childish deception ó the flame reveals what facades hide.</p>
+        <p class="subtitle" id="subtitle">Bold clarity over childish deception ‚Äî the flame reveals what facades hide.</p>
         <div class="cta">
           <a class="btn" id="primaryCta" href="#truth">Own the narrative</a>
-          <a class="btn.ghost btn ghost" href="#features" id="secondaryCta">Explore features</a>
-        </div>
-        <div class="audio-indicator" id="audioStatus" aria-live="polite"></div>
-      </div>
-
-      <div class="showcase">
-        <div class="cube" aria-hidden="true">
-          <div class="face f-front"></div>
-          <div class="face f-back"></div>
-          <div class="face f-right"></div>
-          <div class="face f-left"></div>
-          <div class="face f-top"></div>
-          <div class="face f-bottom"></div>
-          <div class="badge">3D</div>
+          <a class="btn ghost" href="#features" id="secondaryCta">Explore features</a>
         </div>
       </div>
     </section>
 
     <section id="features">
       <div class="grid">
-        <div class="tile">
-          <h3 id="f1t">Expose and clarify</h3>
-          <p id="f1d">Frosted layers over living gradients ó designed to unveil, not to hide.</p>
-        </div>
-        <div class="tile">
-          <h3 id="f2t">Depth that reveals</h3>
-          <p id="f2d">Parallax and tilt surface what shallow angles miss.</p>
-        </div>
-        <div class="tile">
-          <h3 id="f3t">Voices across languages</h3>
-          <p id="f3d">Switch instantly. Let truth speak in every tongue.</p>
-        </div>
+        <div class="tile"><h3 id="f1t">Expose and clarify</h3><p id="f1d">Frosted layers over living gradients ‚Äî designed to unveil, not to hide.</p></div>
+        <div class="tile"><h3 id="f2t">Depth that reveals</h3><p id="f2d">Parallax and tilt surface what shallow angles miss.</p></div>
+        <div class="tile"><h3 id="f3t">Voices across languages</h3><p id="f3d">Switch instantly. Let truth speak in every tongue.</p></div>
       </div>
     </section>
 
-    <section id="truth" class="card" style="margin-top:40px">
-      <h2 style="margin-top:0" id="gst">Stand in the light</h2>
+    <section id="truth" class="card">
+      <h2 id="gst">Stand in the light</h2>
       <p id="gsd">Choose clarity. Let the embers lift the veil.</p>
       <div class="cta">
         <a class="btn" href="#features">See how</a>
@@ -138,169 +64,18 @@
     </section>
   </main>
 
-  <footer>
-    © <span id="year"></span> Ignite Studio ó crafted for the brave.
-  </footer>
-
-  <audio id="fireSound" loop preload="none">
-    <!-- Add a short, royalty-free fire crackle audio source if you want sound -->
-    <!-- <source src="fire-crackle.mp3" type="audio/mpeg"> -->
-  </audio>
+  <footer>¬© <span id="year"></span> Ignite Studio ‚Äî crafted for the brave.</footer>
 
   <script>
-    // Ember generation
-    const emberContainer = document.getElementById('embers');
-    const emberCount = 60;
-    for(let i=0;i<emberCount;i++){
-      const e = document.createElement('div');
-      e.className='ember';
-      e.style.left = Math.random()*100 + 'vw';
-      e.style.bottom = (-20 + Math.random()*40) + 'vh';
-      e.style.animationDelay = (Math.random()*12) + 's';
-      e.style.opacity = .3 + Math.random()*.7;
-      emberContainer.appendChild(e);
-    }
-
-    // Cursor light trail
-    const cursorLight = document.getElementById('cursorLight');
-    window.addEventListener('mousemove', (ev)=>{
-      cursorLight.style.left = ev.clientX + 'px';
-      cursorLight.style.top = ev.clientY + 'px';
-    });
-
-    // Parallax
-    const layer = document.getElementById('layer');
-    window.addEventListener('mousemove', (ev)=>{
-      const x = (ev.clientX / window.innerWidth - .5) * 10;
-      const y = (ev.clientY / window.innerHeight - .5) * 10;
-      layer.style.transform = `translate(${x}px, ${y}px)`;
-      const heroCard = document.getElementById('heroCard');
-      heroCard.style.transform = `rotateY(${x/6}deg) rotateX(${-y/6}deg)`;
-    });
-
-    // Theme toggle
-    const theme = document.getElementById('theme');
-    let intense = false;
-    theme.addEventListener('click', ()=>{
-      intense = !intense;
-      document.documentElement.style.setProperty('--glow-1', intense ? '#ff8a00' : '#ff6a00');
-      document.documentElement.style.setProperty('--glow-2', intense ? '#ff0044' : '#ff1e56');
-      document.documentElement.style.setProperty('--glow-3', intense ? '#ff7eb3' : '#fa709a');
-      theme.textContent = intense ? 'Inferno' : 'Glow';
-    });
-
-    // Audio toggle
-    const audioBtn = document.getElementById('audio');
-    const audioEl = document.getElementById('fireSound');
-    const audioStatus = document.getElementById('audioStatus');
-    let audioOn = false;
-    audioBtn.addEventListener('click', async ()=>{
-      try{
-        if(!audioOn){
-          await audioEl.play();
-          audioOn = true;
-          audioBtn.textContent = 'Sound: On';
-          audioStatus.textContent = 'Crackling fire enabled.';
-        }else{
-          audioEl.pause();
-          audioOn = false;
-          audioBtn.textContent = 'Sound: Off';
-          audioStatus.textContent = 'Sound disabled.';
-        }
-      }catch(e){
-        audioStatus.textContent = 'Add a fire-crackle audio source to enable sound.';
-      }
-    });
-
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // i18n strings (clean, strong wording; no deployment text)
     const strings = {
-      en: {
-        title: "Unmask the lie. Truth stands taller.",
-        subtitle: "Bold clarity over childish deception ó the flame reveals what facades hide.",
-        primaryCta: "Own the narrative",
-        secondaryCta: "Explore features",
-        f1t: "Expose and clarify",
-        f1d: "Frosted layers over living gradients ó designed to unveil, not to hide.",
-        f2t: "Depth that reveals",
-        f2d: "Parallax and tilt surface what shallow angles miss.",
-        f3t: "Voices across languages",
-        f3d: "Switch instantly. Let truth speak in every tongue.",
-        gst: "Stand in the light",
-        gsd: "Choose clarity. Let the embers lift the veil."
-      },
-      ar: {
-        title: "«ﬂ‘› «·“Ì›. «·ÕﬁÌﬁ… √⁄·Ï ﬁ«„….",
-        subtitle: "Ê÷ÊÕ Ã—Ì¡ ›Êﬁ Œœ«⁄ ÿ›Ê·Ì ó «··ÂÌ» Ìﬂ‘› „«  Œ›ÌÂ «·Ê«ÃÂ« .",
-        primaryCta: "«„ ·ﬂ «·”—œ",
-        secondaryCta: "«” ﬂ‘› «·„Ì“« ",
-        f1t: "«ﬂ‘› ÊÊ÷¯Õ",
-        f1d: "ÿ»ﬁ«  „À·¯Ã… ›Êﬁ  œ—Ã«  ÕÌ… ó „’„¯„… ··ﬂ‘› ·« ··≈Œ›«¡.",
-        f2t: "⁄„ﬁ Ìﬂ‘›",
-        f2d: "«·„‰Ÿ— Ê«·≈„«·… ÌıŸÂ—«‰ „« Ì›Ê  «·“Ê«Ì« «·”ÿÕÌ….",
-        f3t: "√’Ê«  ⁄»— «··€« ",
-        f3d: "»œ¯· ›Ê—«. œ⁄ «·ÕﬁÌﬁ…   ÕœÀ »ﬂ· ·”«‰.",
-        gst: "ﬁ› ›Ì «·÷Ê¡",
-        gsd: "«Œ — «·Ê÷ÊÕ. œ⁄ «·Ã„— Ì—›⁄ «·” «—."
-      },
-      th: {
-        title: "?????????????? ????????????????????",
-        subtitle: "??????????????????????????????????????? ? ó ?????????????????????????????",
-        primaryCta: "??????????????????",
-        secondaryCta: "?????????",
-        f1t: "????????????????",
-        f1d: "???????????????????????????? ó ?????????????? ???????????",
-        f2t: "?????????????",
-        f2d: "????????????????????????????????????????????????",
-        f3t: "????????????",
-        f3d: "????????? ????????????????????????",
-        gst: "????????",
-        gsd: "??????????????? ?????????????"
-      },
-      hi: {
-        title: "??? ?? ?????? ?????? ?? ?? ???? ???? ???",
-        subtitle: "?????? ?? ?? ????? ???????? ó ?? ?? ?????? ?? ?? ?????? ?????? ????",
-        primaryCta: "??? ???? ??? ??? ??",
-        secondaryCta: "??????? ?????",
-        f1t: "????? ?? ??????",
-        f1d: "????? ??????????? ?? ????????? ?????? ó ?????? ?? ??? ????, ????? ???? ?? ???",
-        f2t: "????? ?? ?????? ??",
-        f2d: "????????? ?? ????? ?? ????? ???? ??? ?? ???? ??? ????? ???",
-        f3t: "?? ???? ?? ?????",
-        f3d: "????? ????? ó ?? ?? ?????? ??? ????",
-        gst: "????? ??? ???? ??",
-        gsd: "???????? ???? ó ?????? ???? ?????"
-      },
-      es: {
-        title: "Desenmascara la mentira. La verdad se alza m?s alta.",
-        subtitle: "Claridad audaz sobre el enga?o infantil ó la llama revela lo que las fachadas ocultan.",
-        primaryCta: "Toma la narrativa",
-        secondaryCta: "Explorar funciones",
-        f1t: "Exponer y aclarar",
-        f1d: "Capas esmeriladas sobre degradados vivos ó hechas para revelar, no ocultar.",
-        f2t: "Profundidad que revela",
-        f2d: "Parallax y tilt sacan a la superficie lo que los ?ngulos superficiales no ven.",
-        f3t: "Voces en todas las lenguas",
-        f3d: "Cambia al instante. Deja que la verdad hable en cada idioma.",
-        gst: "Permanece en la luz",
-        gsd: "Elige claridad. Deja que las brasas levanten el velo."
-      }
+      en:{title:"Unmask the lie. Truth stands taller.",subtitle:"Bold clarity over childish deception ‚Äî the flame reveals what facades hide.",primaryCta:"Own the narrative",secondaryCta:"Explore features",f1t:"Expose and clarify",f1d:"Frosted layers over living gradients ‚Äî designed to unveil, not to hide.",f2t:"Depth that reveals",f2d:"Parallax and tilt surface what shallow angles miss.",f3t:"Voices across languages",f3d:"Switch instantly. Let truth speak in every tongue.",gst:"Stand in the light",gsd:"Choose clarity. Let the embers lift the veil."},
+      ar:{title:"ÿßŸÉÿ¥ŸÅ ÿßŸÑÿ≤ŸäŸÅ. ÿßŸÑÿ≠ŸÇŸäŸÇÿ© ÿ£ÿπŸÑŸâ ŸÇÿßŸÖÿ©.",subtitle:"Ÿàÿ∂Ÿàÿ≠ ÿ¨ÿ±Ÿäÿ° ŸÅŸàŸÇ ÿÆÿØÿßÿπ ÿ∑ŸÅŸàŸÑŸä ‚Äî ÿßŸÑŸÑŸáŸäÿ® ŸäŸÉÿ¥ŸÅ ŸÖÿß ÿ™ÿÆŸÅŸäŸá ÿßŸÑŸàÿßÿ¨Ÿáÿßÿ™.",primaryCta:"ÿßŸÖÿ™ŸÑŸÉ ÿßŸÑÿ≥ÿ±ÿØ",secondaryCta:"ÿßÿ≥ÿ™ŸÉÿ¥ŸÅ ÿßŸÑŸÖŸäÿ≤ÿßÿ™",f1t:"ÿßŸÉÿ¥ŸÅ ŸàŸàÿ∂Ÿëÿ≠",f1d:"ÿ∑ÿ®ŸÇÿßÿ™ ŸÖÿ´ŸÑŸëÿ¨ÿ© ŸÅŸàŸÇ ÿ™ÿØÿ±ÿ¨ÿßÿ™ ÿ≠Ÿäÿ© ‚Äî ŸÖÿµŸÖŸëŸÖÿ© ŸÑŸÑŸÉÿ¥ŸÅ ŸÑÿß ŸÑŸÑÿ•ÿÆŸÅÿßÿ°.",f2t:"ÿπŸÖŸÇ ŸäŸÉÿ¥ŸÅ",f2d:"ÿßŸÑŸÖŸÜÿ∏ÿ± ŸàÿßŸÑÿ•ŸÖÿßŸÑÿ© ŸäŸèÿ∏Ÿáÿ±ÿßŸÜ ŸÖÿß ŸäŸÅŸàÿ™ ÿßŸÑÿ≤ŸàÿßŸäÿß ÿßŸÑÿ≥ÿ∑ÿ≠Ÿäÿ©.",f3t:"ÿ£ÿµŸàÿßÿ™ ÿπÿ®ÿ± ÿßŸÑŸÑÿ∫ÿßÿ™",f3d:"ÿ®ÿØŸëŸÑ ŸÅŸàÿ±Ÿãÿß. ÿØÿπ ÿßŸÑÿ≠ŸÇŸäŸÇÿ© ÿ™ÿ™ÿ≠ÿØÿ´ ÿ®ŸÉŸÑ ŸÑÿ≥ÿßŸÜ.",gst:"ŸÇŸÅ ŸÅŸä ÿßŸÑÿ∂Ÿàÿ°",gsd:"ÿßÿÆÿ™ÿ± ÿßŸÑŸàÿ∂Ÿàÿ≠. ÿØÿπ ÿßŸÑÿ¨ŸÖÿ± Ÿäÿ±ŸÅÿπ ÿßŸÑÿ≥ÿ™ÿßÿ±."}
     };
-
-    const ids = ["title","subtitle","primaryCta","secondaryCta","f1t","f1d","f2t","f2d","f3t","f3d","gst","gsd"];
-    const langSelect = document.getElementById('lang');
-    const applyLang = (code)=>{
-      const s = strings[code] || strings.en;
-      ids.forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.textContent = s[id];
-      });
-      document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = code;
-    };
-    langSelect.addEventListener('change', e=> applyLang(e.target.value));
+    const ids=["title","subtitle","primaryCta","secondaryCta","f1t","f1d","f2t","f2d","f3t","f3d","gst","gsd"];
+    const langSelect=document.getElementById('lang');
+    const applyLang=(code)=>{const s=strings[code]||strings.en;ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=s[id];});document.documentElement.dir=code==='ar'?'rtl':'ltr';document.documentElement.lang=code;};
+    langSelect.addEventListener('change',e=>applyLang(e.target.value));
     applyLang('en');
   </script>
 </body>
