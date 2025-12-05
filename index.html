@@ -3,102 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RageGlass — Neuro Mysterious UI</title>
-  <meta name="description" content="A neuro, mysterious, angry glassmorphism UI with glitch, smoke, and reactive motion." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <title>RageGlass — Exposed Truth</title>
+  <meta name="description" content="A dark, angry, mysterious glass UI with smoke, glitch, neon cursor aura, multilingual text, and a 3D logo cube." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
   <style>
     :root{
-      /* Angry, mysterious palette */
-      --bg-1:#06070a;
-      --bg-2:#0b0e14;
-      --bg-3:#0f131b;
-      --rage-red:#ff0033;
-      --rage-amber:#ff5500;
-      --cold-cyan:#00e5ff;
-      --void-purple:#7a00ff;
-      --glass-bg:rgba(255,255,255,.06);
-      --glass-border:rgba(255,255,255,.18);
-      --text:#e9ebf2;
-      --muted:#9aa0b3;
-      --shadow:#000000dd;
+      --bg-1:#06070a; --bg-2:#0b0e14;
+      --rage-red:#ff0033; --rage-amber:#ff5500;
+      --cold-cyan:#00e5ff; --void-purple:#7a00ff;
+      --glass-bg:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.18);
+      --text:#e9ebf2; --muted:#9aa0b3; --shadow:#000000dd;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; color:var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background:
-        radial-gradient(900px 500px at 12% 8%, #120915, var(--bg-2) 40%, var(--bg-1) 100%),
-        linear-gradient(180deg, #050608, #0b0e14);
+      margin:0; color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
       overflow-x:hidden;
     }
 
-    /* Cinematic noise layer */
-    .noise{
-      position:fixed; inset:0; z-index:0; pointer-events:none;
-      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
-      mix-blend-mode:soft-light;
-    }
-
-    /* Pulsing gradient vignettes */
-    .vignette{
-      position:fixed; inset:0; z-index:-2; pointer-events:none;
-      background:
-        radial-gradient(600px 320px at 85% 10%, rgba(255,0,51,.20), transparent 70%),
-        radial-gradient(800px 420px at 10% 90%, rgba(0,229,255,.12), transparent 70%),
-        radial-gradient(1200px 500px at 50% 50%, rgba(122,0,255,.08), transparent 70%);
-      animation: vignettePulse 9s ease-in-out infinite;
-      filter: saturate(130%) blur(1px);
-    }
-    @keyframes vignettePulse{
-      0%{opacity:.65; transform:scale(1)}
-      50%{opacity:.85; transform:scale(1.03)}
-      100%{opacity:.65; transform:scale(1)}
-    }
-
-    /* Smoky waves */
+    /* Background smoke */
     .smoke{
-      position:fixed; inset:-10% -10%; z-index:-1; pointer-events:none;
+      position:fixed; inset:-10%; z-index:-1;
       background: conic-gradient(from 180deg at 50% 50%, rgba(255,0,51,.10), rgba(0,229,255,.08), rgba(122,0,255,.10), rgba(255,0,51,.10));
-      filter: blur(80px) contrast(110%);
-      animation: smokeSpin 28s linear infinite;
-      opacity:.25;
+      filter: blur(80px);
+      animation: smokeSpin 30s linear infinite;
+      opacity:.28;
     }
-    @keyframes smokeSpin{
-      0%{transform:rotate(0deg)}
-      50%{transform:rotate(180deg)}
-      100%{transform:rotate(360deg)}
+    @keyframes smokeSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+    /* Neon cursor aura */
+    .cursor-aura{
+      position:fixed; width:220px; height:220px; border-radius:50%;
+      pointer-events:none; z-index:2;
+      background: radial-gradient(circle, rgba(255,0,51,.18), rgba(0,229,255,.10), transparent 70%);
+      filter: blur(22px) saturate(130%);
+      transform: translate(-50%, -50%);
+      mix-blend-mode: screen;
     }
 
     header{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter: saturate(160%) blur(10px);
+      position:sticky; top:0; backdrop-filter: blur(10px);
       background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0));
-      border-bottom:1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      z-index:3;
     }
-    .nav{max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:16px;}
-    .logo{font-weight:900; letter-spacing:.6px; display:flex; align-items:center; gap:10px;}
+    .nav{max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:12px}
+    .logo{font-weight:900; display:flex; align-items:center; gap:10px}
     .mark{
       width:24px; height:24px; border-radius:6px;
       background: linear-gradient(135deg, var(--rage-red), var(--void-purple));
       box-shadow: 0 10px 30px #ff003388;
     }
     .nav-actions{margin-left:auto; display:flex; gap:12px; align-items:center}
+    .lang{
+      appearance:none; border:1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color:var(--text); padding:8px 12px; border-radius:10px;
+      backdrop-filter: blur(8px);
+    }
     .btn{
       border:none; border-radius:12px; padding:10px 16px; cursor:pointer;
-      color:#06070a; font-weight:800; letter-spacing:.4px;
+      color:#06070a; font-weight:800; letter-spacing:.3px;
       background: linear-gradient(135deg, var(--rage-red), var(--rage-amber));
       box-shadow: 0 10px 30px #ff003333;
       transition: transform .15s ease, box-shadow .15s ease, filter .2s;
     }
     .btn:hover{transform: translateY(-2px); box-shadow:0 18px 40px #ff003344; filter:brightness(1.05)}
     .btn.ghost{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
       color:var(--text); border:1px solid var(--glass-border);
-      box-shadow:0 8px 24px #0008;
+      box-shadow: 0 8px 24px #0008;
     }
     .btn.ghost:hover{box-shadow:0 14px 34px #000a}
 
@@ -116,7 +94,7 @@
       box-shadow: 0 30px 100px var(--shadow);
       position:relative; overflow:hidden;
     }
-    /* red-cyan rim lighting inside cards */
+    /* Red-cyan rim lighting */
     .card::before{
       content:""; position:absolute; inset:-1px; border-radius:24px;
       background: linear-gradient(135deg, rgba(255,0,51,.14), rgba(0,229,255,.14));
@@ -124,76 +102,58 @@
       pointer-events:none;
     }
 
+    /* Title with strong glitch */
     .title{
       font-size: clamp(30px, 5vw, 60px); font-weight:900; line-height:1.05;
       background: linear-gradient(135deg, #fff, #ffd7cf);
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
-    /* Neuro pulse + glitch */
-    .title-glow{animation: pulse 3.6s ease-in-out infinite}
-    @keyframes pulse{
-      0%{text-shadow:0 0 14px rgba(255,0,51,.35)}
-      50%{text-shadow:0 0 28px rgba(0,229,255,.45)}
-      100%{text-shadow:0 0 14px rgba(255,0,51,.35)}
-    }
-    .title-glitch{
-      position:relative; display:inline-block;
-    }
+    .title-glitch{position:relative; display:inline-block}
     .title-glitch::before,
     .title-glitch::after{
       content:attr(data-text);
       position:absolute; left:0; top:0;
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:none;
-      animation: glitchShift 2.2s infinite;
-      pointer-events:none;
+      color:transparent; text-shadow:none; pointer-events:none;
     }
-    .title-glitch::before{color:#ff0033; text-shadow: 2px 0 #ff0033; mix-blend-mode:screen}
-    .title-glitch::after{color:#00e5ff; text-shadow: -2px 0 #00e5ff; mix-blend-mode:screen}
+    .title-glitch::before{color:#ff0033; text-shadow: 2px 0 #ff0033; mix-blend-mode:screen; animation: glitchShift 2s infinite}
+    .title-glitch::after{color:#00e5ff; text-shadow: -2px 0 #00e5ff; mix-blend-mode:screen; animation: glitchShift 2s infinite reverse}
     @keyframes glitchShift{
       0%{transform:translate(0,0)}
-      10%{transform:translate(2px,-1px)}
-      20%{transform:translate(-2px,1px)}
-      30%{transform:translate(1px,0)}
-      40%{transform:translate(-1px,2px)}
-      50%{transform:translate(0,-2px)}
-      60%{transform:translate(2px,1px)}
-      70%{transform:translate(-2px,-1px)}
-      80%{transform:translate(1px,1px)}
-      90%{transform:translate(-1px,0)}
+      12%{transform:translate(2px,-1px)}
+      24%{transform:translate(-2px,1px)}
+      36%{transform:translate(1px,0)}
+      48%{transform:translate(-1px,2px)}
+      60%{transform:translate(0,-2px)}
+      72%{transform:translate(2px,1px)}
+      84%{transform:translate(-2px,-1px)}
       100%{transform:translate(0,0)}
     }
 
     .subtitle{color:var(--muted); margin-top:12px}
     .cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
 
-    /* 3D cube, darker and angrier */
-    .showcase{position:relative; height:380px; display:grid; place-items:center; perspective:1000px;}
-    .cube{width:260px; height:260px; position:relative; transform-style:preserve-3d; animation: spin 11s ease-in-out infinite alternate}
+    /* 3D cube with logo faces */
+    .showcase{position:relative; height:360px; display:grid; place-items:center; perspective:1000px;}
+    .cube{width:240px; height:240px; position:relative; transform-style:preserve-3d; animation: spin 12s ease-in-out infinite alternate}
     @keyframes spin{
-      0%{transform: rotateX(12deg) rotateY(-24deg) translateZ(0)}
+      0%{transform: rotateX(12deg) rotateY(-22deg) translateZ(0)}
       50%{transform: rotateX(24deg) rotateY(210deg) translateZ(18px)}
       100%{transform: rotateX(8deg) rotateY(420deg) translateZ(-12px)}
     }
     .face{
-      position:absolute; width:100%; height:100%; border-radius:18px;
-      border:1px solid var(--glass-border);
+      position:absolute; width:100%; height:100%;
+      border-radius:18px; border:1px solid var(--glass-border);
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
-      box-shadow: 0 20px 80px #000c;
-      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 80px #000c; backdrop-filter: blur(14px);
+      overflow:hidden;
     }
-    .f-front{transform: translateZ(130px)}
-    .f-back{transform: rotateY(180deg) translateZ(130px)}
-    .f-right{transform: rotateY(90deg) translateZ(130px)}
-    .f-left{transform: rotateY(-90deg) translateZ(130px)}
-    .f-top{transform: rotateX(90deg) translateZ(130px)}
-    .f-bottom{transform: rotateX(-90deg) translateZ(130px)}
-    .badge{
-      position:absolute; bottom:22px; right:22px;
-      background: linear-gradient(135deg, var(--rage-red), var(--cold-cyan));
-      color:#06070a; font-weight:900; padding:8px 12px; border-radius:12px;
-      box-shadow: 0 10px 30px #ff003344;
-    }
+    .f-front{transform: translateZ(120px)}
+    .f-back{transform: rotateY(180deg) translateZ(120px)}
+    .f-right{transform: rotateY(90deg) translateZ(120px)}
+    .f-left{transform: rotateY(-90deg) translateZ(120px)}
+    .f-top{transform: rotateX(90deg) translateZ(120px)}
+    .f-bottom{transform: rotateX(-90deg) translateZ(120px)}
+    .face img{width:100%; height:100%; object-fit:contain; opacity:.85; filter:saturate(120%) contrast(110%)}
 
     .grid{margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
     @media(max-width:960px){.grid{grid-template-columns:1fr}}
@@ -208,105 +168,81 @@
       transform: translateY(-3px) rotateX(.6deg) rotateY(-.6deg);
       box-shadow: 0 26px 80px #000c; filter: brightness(1.08);
     }
-    .tile h3{margin:18px; font-size:18px; font-weight:800}
+    .tile h3{margin:18px 18px 8px; font-size:18px; font-weight:800}
     .tile p{margin:0 18px 18px; color:var(--muted)}
-    .tile::after{
-      content:""; position:absolute; inset:-40% -20%; transform:rotate(12deg);
-      background: radial-gradient(120px 80px at 30% 30%, #fff3 0%, transparent 70%);
-      filter: blur(16px);
-    }
 
     footer{margin-top:60px; padding:28px; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); text-align:center;}
-
-    /* Cursor aura (angry) */
-    .cursor-aura{
-      position:fixed; width:220px; height:220px; border-radius:50%;
-      pointer-events:none; z-index:1;
-      background: radial-gradient(circle, rgba(255,0,51,.18) 0%, rgba(0,229,255,.10) 40%, transparent 70%);
-      filter: blur(22px) saturate(130%);
-      transform: translate(-50%, -50%);
-      transition: transform .03s linear;
-      mix-blend-mode: screen;
-    }
-
-    /* Micro shake on hero when hovering CTA */
-    .shake:hover{animation: microShake .4s ease}
-    @keyframes microShake{
-      0%{transform:translateX(0)}
-      25%{transform:translateX(2px)}
-      50%{transform:translateX(-2px)}
-      75%{transform:translateX(1px)}
-      100%{transform:translateX(0)}
-    }
   </style>
 </head>
 <body>
-  <div class="vignette"></div>
   <div class="smoke"></div>
-  <div class="noise"></div>
   <div class="cursor-aura" id="cursorAura"></div>
 
   <header>
     <nav class="nav">
       <div class="logo"><div class="mark"></div><span>RageGlass</span></div>
       <div class="nav-actions">
-        <button class="btn ghost" id="mode">Intensify</button>
+        <select id="lang" class="lang" aria-label="Language">
+          <option value="en" selected>English</option>
+          <option value="ar">العربية</option>
+        </select>
         <a class="btn" href="#truth">See Truth</a>
       </div>
     </nav>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
-      <div class="card shake" id="heroCard">
-        <h1 class="title title-glow title-glitch" id="title" data-text="Exposed liar, childish facade — truth guided by the mentor flame.">
-          Exposed liar, childish facade — truth guided by the mentor flame.
+      <div class="card" id="heroCard">
+        <h1 class="title title-glitch" id="title" data-text="Exposed liar — childish tricks shattered. Truth burns, mentor flame judges without mercy.">
+          Exposed liar — childish tricks shattered. Truth burns, mentor flame judges without mercy.
         </h1>
-        <p class="subtitle" id="subtitle">
-          Childish lies collapse when exposed; truth rises, mentored by fire itself.
-        </p>
+        <p class="subtitle" id="subtitle">Childish lies scream when exposed; truth stands ruthless, mentored by fire’s rage.</p>
         <div class="cta">
-          <a class="btn" href="#truth" id="primaryCta">Follow the mentor flame</a>
+          <a class="btn" href="#truth" id="primaryCta">Face the harsh truth</a>
           <a class="btn ghost" href="#features" id="secondaryCta">Explore</a>
         </div>
       </div>
 
+      <!-- 3D Logo Cube -->
       <div class="showcase" aria-hidden="true">
         <div class="cube">
-          <div class="face f-front"></div>
-          <div class="face f-back"></div>
-          <div class="face f-right"></div>
-          <div class="face f-left"></div>
-          <div class="face f-top"></div>
-          <div class="face f-bottom"></div>
-          <div class="badge">3D</div>
+          <div class="face f-front"><img src="logo.png" alt="Logo front" /></div>
+          <div class="face f-back"><img src="logo.png" alt="Logo back" /></div>
+          <div class="face f-right"><img src="logo.png" alt="Logo right" /></div>
+          <div class="face f-left"><img src="logo.png" alt="Logo left" /></div>
+          <div class="face f-top"><img src="logo.png" alt="Logo top" /></div>
+          <div class="face f-bottom"><img src="logo.png" alt="Logo bottom" /></div>
         </div>
       </div>
     </section>
 
+    <!-- Features -->
     <section id="features">
       <div class="grid">
         <div class="tile">
-          <h3>Expose the liar</h3>
-          <p>Frosted glass reveals what deception hides.</p>
+          <h3 id="f1t">Expose the liar</h3>
+          <p id="f1d">Brutal clarity tears masks apart.</p>
         </div>
         <div class="tile">
-          <h3>Childish illusions</h3>
-          <p>Tilt and depth show how shallow tricks fail.</p>
+          <h3 id="f2t">Childish illusions</h3>
+          <p id="f2d">Weak games collapse under furious depth.</p>
         </div>
         <div class="tile">
-          <h3>Mentor of truth</h3>
-          <p>Multilingual voices carry wisdom across cultures.</p>
+          <h3 id="f3t">Mentor of truth</h3>
+          <p id="f3d">Flame mentors with harsh justice across every tongue.</p>
         </div>
       </div>
     </section>
 
+    <!-- Truth CTA -->
     <section id="truth" class="card" style="margin-top:40px">
-      <h2>Stand with exposed truth</h2>
-      <p>Choose clarity. Let the embers lift the veil.</p>
+      <h2 id="gst">Stand with exposed truth</h2>
+      <p id="gsd">Choose clarity. Let the embers lift the veil.</p>
       <div class="cta">
-        <a class="btn" href="#features">See how</a>
-        <a class="btn ghost" href="#top">Stay sharp</a>
+        <a class="btn" href="#features">Follow the mentor flame</a>
+        <a class="btn ghost" href="#top">Stay ruthless</a>
       </div>
     </section>
   </main>
@@ -319,14 +255,14 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Cursor aura follows
+    // Cursor aura follow
     const aura = document.getElementById('cursorAura');
     window.addEventListener('mousemove', (e)=>{
       aura.style.left = e.clientX + 'px';
       aura.style.top = e.clientY + 'px';
     });
 
-    // Parallax tilt for hero card based on mouse
+    // Tilt hero card slightly with mouse
     const heroCard = document.getElementById('heroCard');
     window.addEventListener('mousemove', (ev)=>{
       const x = (ev.clientX / window.innerWidth - .5) * 10;
@@ -334,26 +270,53 @@
       heroCard.style.transform = `rotateY(${x/6}deg) rotateX(${-y/6}deg)`;
     });
 
-    // Intensify mode: push colors further (angrier)
-    const modeBtn = document.getElementById('mode');
-    let intense = false;
-    modeBtn.addEventListener('click', ()=>{
-      intense = !intense;
-      document.documentElement.style.setProperty('--rage-red', intense ? '#ff0022' : '#ff0033');
-      document.documentElement.style.setProperty('--rage-amber', intense ? '#ff3b00' : '#ff5500');
-      document.documentElement.style.setProperty('--cold-cyan', intense ? '#00f2ff' : '#00e5ff');
-      document.documentElement.style.setProperty('--void-purple', intense ? '#8a00ff' : '#7a00ff');
-      modeBtn.textContent = intense ? 'Calm Down' : 'Intensify';
-    });
+    // i18n strings
+    const strings = {
+      en: {
+        title: "Exposed liar — childish tricks shattered. Truth burns, mentor flame judges without mercy.",
+        subtitle: "Childish lies scream when exposed; truth stands ruthless, mentored by fire’s rage.",
+        primaryCta: "Face the harsh truth",
+        secondaryCta: "Explore",
+        f1t: "Expose the liar",
+        f1d: "Brutal clarity tears masks apart.",
+        f2t: "Childish illusions",
+        f2d: "Weak games collapse under furious depth.",
+        f3t: "Mentor of truth",
+        f3d: "Flame mentors with harsh justice across every tongue.",
+        gst: "Stand with exposed truth",
+        gsd: "Choose clarity. Let the embers lift the veil."
+      },
+      ar: {
+        title: "الكاذب المكشوف — الخدع الطفولية تتحطم. الحقيقة تحترق، ولهيب المرشد يحكم بلا رحمة.",
+        subtitle: "الأكاذيب الطفولية تصرخ حين تُكشف؛ الحقيقة تقف بلا شفقة، يرشدها غضب النار.",
+        primaryCta: "واجه الحقيقة القاسية",
+        secondaryCta: "استكشف",
+        f1t: "اكشف الكاذب",
+        f1d: "وضوح قاسٍ يمزّق الأقنعة.",
+        f2t: "أوهام طفولية",
+        f2d: "الألاعيب الضعيفة تنهار تحت عمقٍ غاضب.",
+        f3t: "مرشد الحقيقة",
+        f3d: "اللهيب يرشد بعدلٍ صارم بكل لسان.",
+        gst: "قف مع الحقيقة المكشوفة",
+        gsd: "اختر الوضوح. دع الجمر يرفع الستار."
+      }
+    };
 
-    // Title glitch rebake on hover
-    const title = document.getElementById('title');
-    title.addEventListener('mouseenter', ()=>{
-      title.style.animationPlayState = 'paused';
-    });
-    title.addEventListener('mouseleave', ()=>{
-      title.style.animationPlayState = 'running';
-    });
+    const ids = ["title","subtitle","primaryCta","secondaryCta","f1t","f1d","f2t","f2d","f3t","f3d","gst","gsd"];
+    const langSelect = document.getElementById('lang');
+
+    function applyLang(code){
+      const s = strings[code] || strings.en;
+      ids.forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.textContent = s[id];
+      });
+      document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = code;
+    }
+
+    langSelect.addEventListener('change', e=> applyLang(e.target.value));
+    applyLang('en');
   </script>
 </body>
 </html>
