@@ -4,17 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ignite — Glass & Flame</title>
-  <meta name="description" content="A fiery glassmorphism 3D landing experience with multilingual support." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* نفس التنسيقات السابقة مع تعديلات طفيفة */
-    :root{--bg-1:#0b0b12;--bg-2:#140d1a;--glow-1:#ff6a00;--glow-2:#ff1e56;--glow-3:#fa709a;--glass-bg:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.25);--text:#e8e8f0;--muted:#a8a8bc;--shadow:#000000cc;}
-    body{background: radial-gradient(1200px 600px at 20% 0%, #1a1022 0%, var(--bg-2) 40%, var(--bg-1) 100%);color:var(--text);font-family:Inter,Tajawal,sans-serif;}
-    .title{font-size:clamp(28px,4vw,54px);font-weight:800;background:linear-gradient(135deg,#fff,#ffd1bf);-webkit-background-clip:text;color:transparent;text-shadow:0 4px 24px #ffffff12;}
+    :root{
+      --bg-1:#0b0b12; --bg-2:#140d1a;
+      --glow-1:#ff6a00; --glow-2:#ff1e56; --glow-3:#fa709a;
+      --glass-bg:rgba(255,255,255,.10); --glass-border:rgba(255,255,255,.25);
+      --text:#e8e8f0; --muted:#a8a8bc; --shadow:#000000cc;
+    }
+    body{margin:0; background:radial-gradient(1200px 600px at 20% 0%, #1a1022 0%, var(--bg-2) 40%, var(--bg-1) 100%);
+      color:var(--text); font-family:Inter,Tajawal,sans-serif; overflow-x:hidden;}
+    header{position:sticky;top:0;backdrop-filter:saturate(130%) blur(10px);
+      background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0));border-bottom:1px solid rgba(255,255,255,.08);}
+    .nav{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:16px;}
+    .logo{font-weight:800;display:flex;align-items:center;gap:10px;}
+    .logo .mark{width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--glow-1),var(--glow-2));box-shadow:0 10px 30px var(--glow-2);}
+    .nav-actions{margin-left:auto;display:flex;gap:12px;align-items:center}
+    .btn{border:none;border-radius:12px;padding:10px 16px;cursor:pointer;color:#0b0b12;font-weight:700;
+      background:linear-gradient(135deg,var(--glow-1),var(--glow-2));box-shadow:0 10px 30px #ff1e5633;transition:.2s;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px #ff1e5644}
+    .btn.ghost{background:var(--glass-bg);color:var(--text);border:1px solid var(--glass-border);}
+    main{max-width:1200px;margin:0 auto;padding:48px 24px;}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--glass-border);
+      border-radius:24px;padding:28px;backdrop-filter:blur(16px);box-shadow:0 30px 80px var(--shadow);}
+    .title{font-size:clamp(28px,4vw,54px);font-weight:800;background:linear-gradient(135deg,#fff,#ffd1bf);
+      -webkit-background-clip:text;color:transparent;text-shadow:0 0 24px #ff6a0033;}
     .title-glow{animation:glowMorph 6s ease-in-out infinite;}
     @keyframes glowMorph{0%{text-shadow:0 0 24px #ff6a0033}50%{text-shadow:0 0 34px #ff1e5644}100%{text-shadow:0 0 24px #fa709a33}}
+    .subtitle{color:var(--muted);margin-top:12px}
+    .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .tile{border-radius:20px;border:1px solid var(--glass-border);background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+      box-shadow:0 18px 50px #0008;padding:18px;transition:.2s;}
+    .tile:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 26px 70px #000a}
+    footer{margin-top:60px;padding:28px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);text-align:center;}
   </style>
 </head>
 <body>
@@ -22,41 +47,32 @@
     <nav class="nav">
       <div class="logo"><div class="mark"></div><span>Ignite</span></div>
       <div class="nav-actions">
-        <select id="lang" class="lang">
-          <option value="en" selected>English</option>
-          <option value="ar">العربية</option>
-          <option value="th">ไทย</option>
-          <option value="hi">हिन्दी</option>
-          <option value="es">Español</option>
-        </select>
-        <a class="btn" href="#truth">See the truth</a>
+        <a class="btn" href="#truth">See Truth</a>
       </div>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="card" id="heroCard">
-        <h1 class="title title-glow" id="title">Unmask the lie. Truth stands taller.</h1>
-        <p class="subtitle" id="subtitle">Bold clarity over childish deception — the flame reveals what facades hide.</p>
+      <div class="card">
+        <h1 class="title title-glow">Exposed liar, childish facade — truth guided by the mentor flame.</h1>
+        <p class="subtitle">Childish lies collapse when exposed; truth rises, mentored by fire itself.</p>
         <div class="cta">
-          <a class="btn" id="primaryCta" href="#truth">Own the narrative</a>
-          <a class="btn ghost" href="#features" id="secondaryCta">Explore features</a>
+          <a class="btn" href="#truth">Follow the mentor flame</a>
+          <a class="btn ghost" href="#features">Explore</a>
         </div>
       </div>
     </section>
 
-    <section id="features">
-      <div class="grid">
-        <div class="tile"><h3 id="f1t">Expose and clarify</h3><p id="f1d">Frosted layers over living gradients — designed to unveil, not to hide.</p></div>
-        <div class="tile"><h3 id="f2t">Depth that reveals</h3><p id="f2d">Parallax and tilt surface what shallow angles miss.</p></div>
-        <div class="tile"><h3 id="f3t">Voices across languages</h3><p id="f3d">Switch instantly. Let truth speak in every tongue.</p></div>
-      </div>
+    <section id="features" class="grid">
+      <div class="tile"><h3>Expose the liar</h3><p>Frosted glass reveals what deception hides.</p></div>
+      <div class="tile"><h3>Childish illusions</h3><p>Tilt and depth show how shallow tricks fail.</p></div>
+      <div class="tile"><h3>Mentor of truth</h3><p>Multilingual voices carry wisdom across cultures.</p></div>
     </section>
 
-    <section id="truth" class="card">
-      <h2 id="gst">Stand in the light</h2>
-      <p id="gsd">Choose clarity. Let the embers lift the veil.</p>
+    <section id="truth" class="card" style="margin-top:40px">
+      <h2>Stand with exposed truth</h2>
+      <p>Choose clarity. Let the embers lift the veil.</p>
       <div class="cta">
         <a class="btn" href="#features">See how</a>
         <a class="btn ghost" href="#top">Stay sharp</a>
@@ -68,15 +84,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const strings = {
-      en:{title:"Unmask the lie. Truth stands taller.",subtitle:"Bold clarity over childish deception — the flame reveals what facades hide.",primaryCta:"Own the narrative",secondaryCta:"Explore features",f1t:"Expose and clarify",f1d:"Frosted layers over living gradients — designed to unveil, not to hide.",f2t:"Depth that reveals",f2d:"Parallax and tilt surface what shallow angles miss.",f3t:"Voices across languages",f3d:"Switch instantly. Let truth speak in every tongue.",gst:"Stand in the light",gsd:"Choose clarity. Let the embers lift the veil."},
-      ar:{title:"اكشف الزيف. الحقيقة أعلى قامة.",subtitle:"وضوح جريء فوق خداع طفولي — اللهيب يكشف ما تخفيه الواجهات.",primaryCta:"امتلك السرد",secondaryCta:"استكشف الميزات",f1t:"اكشف ووضّح",f1d:"طبقات مثلّجة فوق تدرجات حية — مصمّمة للكشف لا للإخفاء.",f2t:"عمق يكشف",f2d:"المنظر والإمالة يُظهران ما يفوت الزوايا السطحية.",f3t:"أصوات عبر اللغات",f3d:"بدّل فورًا. دع الحقيقة تتحدث بكل لسان.",gst:"قف في الضوء",gsd:"اختر الوضوح. دع الجمر يرفع الستار."}
-    };
-    const ids=["title","subtitle","primaryCta","secondaryCta","f1t","f1d","f2t","f2d","f3t","f3d","gst","gsd"];
-    const langSelect=document.getElementById('lang');
-    const applyLang=(code)=>{const s=strings[code]||strings.en;ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=s[id];});document.documentElement.dir=code==='ar'?'rtl':'ltr';document.documentElement.lang=code;};
-    langSelect.addEventListener('change',e=>applyLang(e.target.value));
-    applyLang('en');
   </script>
 </body>
 </html>
