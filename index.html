@@ -3,50 +3,254 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ignite — Glass & Flame</title>
+  <title>RageGlass — Neuro Mysterious UI</title>
+  <meta name="description" content="A neuro, mysterious, angry glassmorphism UI with glitch, smoke, and reactive motion." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg-1:#0b0b12; --bg-2:#140d1a;
-      --glow-1:#ff6a00; --glow-2:#ff1e56; --glow-3:#fa709a;
-      --glass-bg:rgba(255,255,255,.10); --glass-border:rgba(255,255,255,.25);
-      --text:#e8e8f0; --muted:#a8a8bc; --shadow:#000000cc;
+      /* Angry, mysterious palette */
+      --bg-1:#06070a;
+      --bg-2:#0b0e14;
+      --bg-3:#0f131b;
+      --rage-red:#ff0033;
+      --rage-amber:#ff5500;
+      --cold-cyan:#00e5ff;
+      --void-purple:#7a00ff;
+      --glass-bg:rgba(255,255,255,.06);
+      --glass-border:rgba(255,255,255,.18);
+      --text:#e9ebf2;
+      --muted:#9aa0b3;
+      --shadow:#000000dd;
     }
-    body{margin:0; background:radial-gradient(1200px 600px at 20% 0%, #1a1022 0%, var(--bg-2) 40%, var(--bg-1) 100%);
-      color:var(--text); font-family:Inter,Tajawal,sans-serif; overflow-x:hidden;}
-    header{position:sticky;top:0;backdrop-filter:saturate(130%) blur(10px);
-      background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0));border-bottom:1px solid rgba(255,255,255,.08);}
-    .nav{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:16px;}
-    .logo{font-weight:800;display:flex;align-items:center;gap:10px;}
-    .logo .mark{width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--glow-1),var(--glow-2));box-shadow:0 10px 30px var(--glow-2);}
-    .nav-actions{margin-left:auto;display:flex;gap:12px;align-items:center}
-    .btn{border:none;border-radius:12px;padding:10px 16px;cursor:pointer;color:#0b0b12;font-weight:700;
-      background:linear-gradient(135deg,var(--glow-1),var(--glow-2));box-shadow:0 10px 30px #ff1e5633;transition:.2s;}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px #ff1e5644}
-    .btn.ghost{background:var(--glass-bg);color:var(--text);border:1px solid var(--glass-border);}
-    main{max-width:1200px;margin:0 auto;padding:48px 24px;}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--glass-border);
-      border-radius:24px;padding:28px;backdrop-filter:blur(16px);box-shadow:0 30px 80px var(--shadow);}
-    .title{font-size:clamp(28px,4vw,54px);font-weight:800;background:linear-gradient(135deg,#fff,#ffd1bf);
-      -webkit-background-clip:text;color:transparent;text-shadow:0 0 24px #ff6a0033;}
-    .title-glow{animation:glowMorph 6s ease-in-out infinite;}
-    @keyframes glowMorph{0%{text-shadow:0 0 24px #ff6a0033}50%{text-shadow:0 0 34px #ff1e5644}100%{text-shadow:0 0 24px #fa709a33}}
-    .subtitle{color:var(--muted);margin-top:12px}
-    .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
-    .grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .tile{border-radius:20px;border:1px solid var(--glass-border);background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
-      box-shadow:0 18px 50px #0008;padding:18px;transition:.2s;}
-    .tile:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 26px 70px #000a}
-    footer{margin-top:60px;padding:28px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);text-align:center;}
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 12% 8%, #120915, var(--bg-2) 40%, var(--bg-1) 100%),
+        linear-gradient(180deg, #050608, #0b0e14);
+      overflow-x:hidden;
+    }
+
+    /* Cinematic noise layer */
+    .noise{
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
+      mix-blend-mode:soft-light;
+    }
+
+    /* Pulsing gradient vignettes */
+    .vignette{
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
+      background:
+        radial-gradient(600px 320px at 85% 10%, rgba(255,0,51,.20), transparent 70%),
+        radial-gradient(800px 420px at 10% 90%, rgba(0,229,255,.12), transparent 70%),
+        radial-gradient(1200px 500px at 50% 50%, rgba(122,0,255,.08), transparent 70%);
+      animation: vignettePulse 9s ease-in-out infinite;
+      filter: saturate(130%) blur(1px);
+    }
+    @keyframes vignettePulse{
+      0%{opacity:.65; transform:scale(1)}
+      50%{opacity:.85; transform:scale(1.03)}
+      100%{opacity:.65; transform:scale(1)}
+    }
+
+    /* Smoky waves */
+    .smoke{
+      position:fixed; inset:-10% -10%; z-index:-1; pointer-events:none;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(255,0,51,.10), rgba(0,229,255,.08), rgba(122,0,255,.10), rgba(255,0,51,.10));
+      filter: blur(80px) contrast(110%);
+      animation: smokeSpin 28s linear infinite;
+      opacity:.25;
+    }
+    @keyframes smokeSpin{
+      0%{transform:rotate(0deg)}
+      50%{transform:rotate(180deg)}
+      100%{transform:rotate(360deg)}
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: saturate(160%) blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:16px;}
+    .logo{font-weight:900; letter-spacing:.6px; display:flex; align-items:center; gap:10px;}
+    .mark{
+      width:24px; height:24px; border-radius:6px;
+      background: linear-gradient(135deg, var(--rage-red), var(--void-purple));
+      box-shadow: 0 10px 30px #ff003388;
+    }
+    .nav-actions{margin-left:auto; display:flex; gap:12px; align-items:center}
+    .btn{
+      border:none; border-radius:12px; padding:10px 16px; cursor:pointer;
+      color:#06070a; font-weight:800; letter-spacing:.4px;
+      background: linear-gradient(135deg, var(--rage-red), var(--rage-amber));
+      box-shadow: 0 10px 30px #ff003333;
+      transition: transform .15s ease, box-shadow .15s ease, filter .2s;
+    }
+    .btn:hover{transform: translateY(-2px); box-shadow:0 18px 40px #ff003344; filter:brightness(1.05)}
+    .btn.ghost{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      color:var(--text); border:1px solid var(--glass-border);
+      box-shadow:0 8px 24px #0008;
+    }
+    .btn.ghost:hover{box-shadow:0 14px 34px #000a}
+
+    main{max-width:1200px; margin:0 auto; padding:48px 24px;}
+    .hero{
+      min-height:60vh; display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:center;
+    }
+    @media(max-width:960px){.hero{grid-template-columns:1fr}}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border:1px solid var(--glass-border);
+      border-radius:24px; padding:28px;
+      backdrop-filter: blur(18px) saturate(130%);
+      box-shadow: 0 30px 100px var(--shadow);
+      position:relative; overflow:hidden;
+    }
+    /* red-cyan rim lighting inside cards */
+    .card::before{
+      content:""; position:absolute; inset:-1px; border-radius:24px;
+      background: linear-gradient(135deg, rgba(255,0,51,.14), rgba(0,229,255,.14));
+      mix-blend-mode: overlay; filter: blur(18px);
+      pointer-events:none;
+    }
+
+    .title{
+      font-size: clamp(30px, 5vw, 60px); font-weight:900; line-height:1.05;
+      background: linear-gradient(135deg, #fff, #ffd7cf);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    /* Neuro pulse + glitch */
+    .title-glow{animation: pulse 3.6s ease-in-out infinite}
+    @keyframes pulse{
+      0%{text-shadow:0 0 14px rgba(255,0,51,.35)}
+      50%{text-shadow:0 0 28px rgba(0,229,255,.45)}
+      100%{text-shadow:0 0 14px rgba(255,0,51,.35)}
+    }
+    .title-glitch{
+      position:relative; display:inline-block;
+    }
+    .title-glitch::before,
+    .title-glitch::after{
+      content:attr(data-text);
+      position:absolute; left:0; top:0;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:none;
+      animation: glitchShift 2.2s infinite;
+      pointer-events:none;
+    }
+    .title-glitch::before{color:#ff0033; text-shadow: 2px 0 #ff0033; mix-blend-mode:screen}
+    .title-glitch::after{color:#00e5ff; text-shadow: -2px 0 #00e5ff; mix-blend-mode:screen}
+    @keyframes glitchShift{
+      0%{transform:translate(0,0)}
+      10%{transform:translate(2px,-1px)}
+      20%{transform:translate(-2px,1px)}
+      30%{transform:translate(1px,0)}
+      40%{transform:translate(-1px,2px)}
+      50%{transform:translate(0,-2px)}
+      60%{transform:translate(2px,1px)}
+      70%{transform:translate(-2px,-1px)}
+      80%{transform:translate(1px,1px)}
+      90%{transform:translate(-1px,0)}
+      100%{transform:translate(0,0)}
+    }
+
+    .subtitle{color:var(--muted); margin-top:12px}
+    .cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+
+    /* 3D cube, darker and angrier */
+    .showcase{position:relative; height:380px; display:grid; place-items:center; perspective:1000px;}
+    .cube{width:260px; height:260px; position:relative; transform-style:preserve-3d; animation: spin 11s ease-in-out infinite alternate}
+    @keyframes spin{
+      0%{transform: rotateX(12deg) rotateY(-24deg) translateZ(0)}
+      50%{transform: rotateX(24deg) rotateY(210deg) translateZ(18px)}
+      100%{transform: rotateX(8deg) rotateY(420deg) translateZ(-12px)}
+    }
+    .face{
+      position:absolute; width:100%; height:100%; border-radius:18px;
+      border:1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      box-shadow: 0 20px 80px #000c;
+      backdrop-filter: blur(14px);
+    }
+    .f-front{transform: translateZ(130px)}
+    .f-back{transform: rotateY(180deg) translateZ(130px)}
+    .f-right{transform: rotateY(90deg) translateZ(130px)}
+    .f-left{transform: rotateY(-90deg) translateZ(130px)}
+    .f-top{transform: rotateX(90deg) translateZ(130px)}
+    .f-bottom{transform: rotateX(-90deg) translateZ(130px)}
+    .badge{
+      position:absolute; bottom:22px; right:22px;
+      background: linear-gradient(135deg, var(--rage-red), var(--cold-cyan));
+      color:#06070a; font-weight:900; padding:8px 12px; border-radius:12px;
+      box-shadow: 0 10px 30px #ff003344;
+    }
+
+    .grid{margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+    @media(max-width:960px){.grid{grid-template-columns:1fr}}
+    .tile{
+      position:relative; overflow:hidden;
+      border-radius:20px; border:1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow: 0 18px 60px #000a;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s;
+    }
+    .tile:hover{
+      transform: translateY(-3px) rotateX(.6deg) rotateY(-.6deg);
+      box-shadow: 0 26px 80px #000c; filter: brightness(1.08);
+    }
+    .tile h3{margin:18px; font-size:18px; font-weight:800}
+    .tile p{margin:0 18px 18px; color:var(--muted)}
+    .tile::after{
+      content:""; position:absolute; inset:-40% -20%; transform:rotate(12deg);
+      background: radial-gradient(120px 80px at 30% 30%, #fff3 0%, transparent 70%);
+      filter: blur(16px);
+    }
+
+    footer{margin-top:60px; padding:28px; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); text-align:center;}
+
+    /* Cursor aura (angry) */
+    .cursor-aura{
+      position:fixed; width:220px; height:220px; border-radius:50%;
+      pointer-events:none; z-index:1;
+      background: radial-gradient(circle, rgba(255,0,51,.18) 0%, rgba(0,229,255,.10) 40%, transparent 70%);
+      filter: blur(22px) saturate(130%);
+      transform: translate(-50%, -50%);
+      transition: transform .03s linear;
+      mix-blend-mode: screen;
+    }
+
+    /* Micro shake on hero when hovering CTA */
+    .shake:hover{animation: microShake .4s ease}
+    @keyframes microShake{
+      0%{transform:translateX(0)}
+      25%{transform:translateX(2px)}
+      50%{transform:translateX(-2px)}
+      75%{transform:translateX(1px)}
+      100%{transform:translateX(0)}
+    }
   </style>
 </head>
 <body>
+  <div class="vignette"></div>
+  <div class="smoke"></div>
+  <div class="noise"></div>
+  <div class="cursor-aura" id="cursorAura"></div>
+
   <header>
     <nav class="nav">
-      <div class="logo"><div class="mark"></div><span>Ignite</span></div>
+      <div class="logo"><div class="mark"></div><span>RageGlass</span></div>
       <div class="nav-actions">
+        <button class="btn ghost" id="mode">Intensify</button>
         <a class="btn" href="#truth">See Truth</a>
       </div>
     </nav>
@@ -54,20 +258,47 @@
 
   <main>
     <section class="hero">
-      <div class="card">
-        <h1 class="title title-glow">Exposed liar, childish facade — truth guided by the mentor flame.</h1>
-        <p class="subtitle">Childish lies collapse when exposed; truth rises, mentored by fire itself.</p>
+      <div class="card shake" id="heroCard">
+        <h1 class="title title-glow title-glitch" id="title" data-text="Exposed liar, childish facade — truth guided by the mentor flame.">
+          Exposed liar, childish facade — truth guided by the mentor flame.
+        </h1>
+        <p class="subtitle" id="subtitle">
+          Childish lies collapse when exposed; truth rises, mentored by fire itself.
+        </p>
         <div class="cta">
-          <a class="btn" href="#truth">Follow the mentor flame</a>
-          <a class="btn ghost" href="#features">Explore</a>
+          <a class="btn" href="#truth" id="primaryCta">Follow the mentor flame</a>
+          <a class="btn ghost" href="#features" id="secondaryCta">Explore</a>
+        </div>
+      </div>
+
+      <div class="showcase" aria-hidden="true">
+        <div class="cube">
+          <div class="face f-front"></div>
+          <div class="face f-back"></div>
+          <div class="face f-right"></div>
+          <div class="face f-left"></div>
+          <div class="face f-top"></div>
+          <div class="face f-bottom"></div>
+          <div class="badge">3D</div>
         </div>
       </div>
     </section>
 
-    <section id="features" class="grid">
-      <div class="tile"><h3>Expose the liar</h3><p>Frosted glass reveals what deception hides.</p></div>
-      <div class="tile"><h3>Childish illusions</h3><p>Tilt and depth show how shallow tricks fail.</p></div>
-      <div class="tile"><h3>Mentor of truth</h3><p>Multilingual voices carry wisdom across cultures.</p></div>
+    <section id="features">
+      <div class="grid">
+        <div class="tile">
+          <h3>Expose the liar</h3>
+          <p>Frosted glass reveals what deception hides.</p>
+        </div>
+        <div class="tile">
+          <h3>Childish illusions</h3>
+          <p>Tilt and depth show how shallow tricks fail.</p>
+        </div>
+        <div class="tile">
+          <h3>Mentor of truth</h3>
+          <p>Multilingual voices carry wisdom across cultures.</p>
+        </div>
+      </div>
     </section>
 
     <section id="truth" class="card" style="margin-top:40px">
@@ -80,10 +311,49 @@
     </section>
   </main>
 
-  <footer>© <span id="year"></span> Ignite Studio — crafted for the brave.</footer>
+  <footer>
+    © <span id="year"></span> RageGlass Studio — forged in the dark.
+  </footer>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Cursor aura follows
+    const aura = document.getElementById('cursorAura');
+    window.addEventListener('mousemove', (e)=>{
+      aura.style.left = e.clientX + 'px';
+      aura.style.top = e.clientY + 'px';
+    });
+
+    // Parallax tilt for hero card based on mouse
+    const heroCard = document.getElementById('heroCard');
+    window.addEventListener('mousemove', (ev)=>{
+      const x = (ev.clientX / window.innerWidth - .5) * 10;
+      const y = (ev.clientY / window.innerHeight - .5) * 10;
+      heroCard.style.transform = `rotateY(${x/6}deg) rotateX(${-y/6}deg)`;
+    });
+
+    // Intensify mode: push colors further (angrier)
+    const modeBtn = document.getElementById('mode');
+    let intense = false;
+    modeBtn.addEventListener('click', ()=>{
+      intense = !intense;
+      document.documentElement.style.setProperty('--rage-red', intense ? '#ff0022' : '#ff0033');
+      document.documentElement.style.setProperty('--rage-amber', intense ? '#ff3b00' : '#ff5500');
+      document.documentElement.style.setProperty('--cold-cyan', intense ? '#00f2ff' : '#00e5ff');
+      document.documentElement.style.setProperty('--void-purple', intense ? '#8a00ff' : '#7a00ff');
+      modeBtn.textContent = intense ? 'Calm Down' : 'Intensify';
+    });
+
+    // Title glitch rebake on hover
+    const title = document.getElementById('title');
+    title.addEventListener('mouseenter', ()=>{
+      title.style.animationPlayState = 'paused';
+    });
+    title.addEventListener('mouseleave', ()=>{
+      title.style.animationPlayState = 'running';
+    });
   </script>
 </body>
 </html>
